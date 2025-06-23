@@ -1,8 +1,6 @@
 package com.example.userservice.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,6 +21,7 @@ public class User {
     @Column(nullable = false)
     private String password;
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private UserRole role;
     @Column(name = "created_at")
     private Date createdAt;
