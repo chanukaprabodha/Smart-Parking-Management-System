@@ -13,9 +13,13 @@ spring:
               enabled: true
           routes:
             - id: user-service
-              uri: lb://user-service
+              uri: lb://USER-SERVICE
               predicates:
                 - Path=/api/v1/users/**
+            - id: vehicle-service
+              uri: lb://VEHICLE-SERVICE
+              predicates:
+                - Path=/api/v1/vehicles/**
 
 eureka:
   client:

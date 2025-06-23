@@ -2,9 +2,11 @@ package com.example.userservice.controller;
 
 import com.example.userservice.dto.ResponseDTO;
 import com.example.userservice.dto.UserDTO;
+import com.example.userservice.entity.User;
 import com.example.userservice.service.UserService;
 import com.example.userservice.util.IdGenerator;
 import com.example.userservice.util.VarList;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin
@@ -20,6 +23,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private ModelMapper modelMapper;
 
     @PostMapping(value = "/addUser")
     //http://localhost:8081/api/v1/users/addUser
@@ -126,6 +132,16 @@ public class UserController {
                     userService.getAllUser()));
         } catch (Exception e) {
             throw new RuntimeException("Error while retrieving all users: " + e.getMessage());
+        }
+    }
+
+    @GetMapping("/{email}")
+    public ResponseEntity<UserDTO> getUserByEmail(@PathVariable String email) {
+        Optional<UserDTO> user = userService.getUserByEmail(email);
+        if (user != null) {
+            return ResponseEntity.ok(modelMapper.map(user.get(), UserDTO.class));
+        } else {
+            return ResponseEntity.notFound().build();
         }
     }
 }

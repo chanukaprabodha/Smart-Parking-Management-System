@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -60,11 +61,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public int deleteUser(String email, String password) {
         try {
-            User user = userRepository.findByEmail(email.toLowerCase());
-            if (user == null || !passwordEncoder.matches(password, user.getPassword())) {
+            Optional<User> user = userRepository.findByEmail(email.toLowerCase());
+            if (user.isEmpty() || !passwordEncoder.matches(password, user.get().getPassword())) {
                 return VarList.Not_Found;
             }
-            userRepository.delete(user);
+            userRepository.delete(user.get());
             return VarList.OK;
 
         } catch (Exception e) {
@@ -82,5 +83,22 @@ public class UserServiceImpl implements UserService {
         } catch (Exception e) {
             throw new RuntimeException("Error while fetching all users: " + e.getMessage());
         }
+    }
+
+    @Override
+    public Optional<User> findByEmail(String email) {
+        try {
+            return userRepository.findByEmail(email.toLowerCase());
+        } catch (Exception e) {
+            throw new RuntimeException("Error while finding user by email: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public Optional<UserDTO> getUserByEmail(String email) {
+        System.out.println("Fetching user by email: " + email);
+        return Optional.ofNullable(userRepository.findByEmail(email)
+                .map(user -> modelMapper.map(user, UserDTO.class))
+                .orElse(null));
     }
 }
