@@ -12,13 +12,14 @@
         <module name="Eureka-Server" />
         <module name="Api-Gateway" />
       </profile>
-      <profile name="Annotation profile for user-service" enabled="true">
+      <profile name="Annotation profile for VehicleService" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath>
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
         </processorPath>
+        <module name="VehicleService" />
         <module name="UserService" />
       </profile>
     </annotationProcessing>
@@ -31,6 +32,7 @@
       <module name="Api-Gateway" options="-parameters" />
       <module name="Eureka-Server" options="-parameters" />
       <module name="UserService" options="-parameters" />
+      <module name="VehicleService" options="-parameters" />
     </option>
   </component>
 </project>
