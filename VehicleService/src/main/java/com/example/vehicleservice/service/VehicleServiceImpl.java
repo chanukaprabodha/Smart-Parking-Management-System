@@ -99,7 +99,6 @@ public class VehicleServiceImpl implements VehicleService {
                     "http://user-service/api/v1/users/" + email,
                     UserDTO.class
             );
-            System.out.println("User exists: " + response.getBody());
             return response.getStatusCode().is2xxSuccessful();
         } catch (HttpClientErrorException.NotFound e) {
             return true;

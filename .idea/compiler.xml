@@ -2,9 +2,7 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
-      <profile default="true" name="Default" enabled="true">
-        <processorPath useClasspath="false" />
-      </profile>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -22,6 +20,15 @@
         <module name="VehicleService" />
         <module name="UserService" />
       </profile>
+      <profile name="Annotation profile for ParkingSpaceService" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath>
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
+        </processorPath>
+        <module name="ParkingSpaceService" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Util" target="17" />
@@ -31,6 +38,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Api-Gateway" options="-parameters" />
       <module name="Eureka-Server" options="-parameters" />
+      <module name="ParkingSpaceService" options="-parameters" />
       <module name="UserService" options="-parameters" />
       <module name="VehicleService" options="-parameters" />
     </option>

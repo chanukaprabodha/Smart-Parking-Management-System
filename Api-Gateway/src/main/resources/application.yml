@@ -20,6 +20,10 @@ spring:
               uri: lb://VEHICLE-SERVICE
               predicates:
                 - Path=/api/v1/vehicles/**
+            - id: parking-service
+              uri: lb://PARKING-SERVICE
+              predicates:
+                - Path=/api/v1/parking/**
 
 eureka:
   client:
