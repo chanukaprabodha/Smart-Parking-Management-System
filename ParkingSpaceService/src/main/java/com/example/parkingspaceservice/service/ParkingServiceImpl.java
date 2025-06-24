@@ -121,7 +121,6 @@ public class ParkingServiceImpl implements ParkingService {
             );
             if (response.getStatusCode().is2xxSuccessful()) {
                 UserDTO user = response.getBody();
-                System.out.println(response.getStatusCode().is2xxSuccessful());
                 return user.getRole() == UserRole.ADMIN;
             }
             return false;
